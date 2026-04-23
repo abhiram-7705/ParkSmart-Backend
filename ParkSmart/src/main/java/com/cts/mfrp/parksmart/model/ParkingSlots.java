@@ -32,6 +32,8 @@ public class ParkingSlots {
 	@JoinColumn(name = "space_id")
 	private ParkingSpaces parkingSpace;
 	
+	@OneToMany(mappedBy = "slot")
+	private List<SlotHold> holds;
 	
 
 	public ParkingSlots() {

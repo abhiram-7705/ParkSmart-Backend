@@ -11,7 +11,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cts.mfrp.parksmart.dto.ParkingCardDTO;
+import com.cts.mfrp.parksmart.dto.SpaceSearchRequestDTO;
 import com.cts.mfrp.parksmart.service.SearchService;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("api/search")
@@ -32,6 +36,12 @@ public class SearchController {
         List<String> suggestions = searchService.getLocationSuggestions(query);
         return ResponseEntity.ok(suggestions);
     }
+	@PostMapping("/spaces/search")
+	public ResponseEntity<List<ParkingCardDTO>> searchSpaces(
+	        @Valid @RequestBody SpaceSearchRequestDTO request) {
+
+	    return ResponseEntity.ok(searchService.searchSpaces(request));
+	}
 
 
 }
