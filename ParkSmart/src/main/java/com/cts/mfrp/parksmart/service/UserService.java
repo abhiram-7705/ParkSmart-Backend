@@ -162,7 +162,7 @@ public class UserService {
     	walletDetails.setDescription(wallet.getDescription());
     	walletDetails.setTransactionType(wallet.getTransactionType());
     	walletDetails.setAmount(wallet.getAmount());
-    	walletDetails.setBalance(wallet.getUpdatedBalance());
+    	walletDetails.setTransactionId(wallet.getTransactionId());
     	
     	return walletDetails;
     }

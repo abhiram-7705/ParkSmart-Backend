@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.cts.mfrp.parksmart.dto.BookingCardDTO;
 import com.cts.mfrp.parksmart.dto.BookingSearchRequestDTO;
 import com.cts.mfrp.parksmart.dto.CancelBookingRequestDTO;
+import com.cts.mfrp.parksmart.dto.ContactRequestDTO;
 import com.cts.mfrp.parksmart.dto.RatingRequestDTO;
 import com.cts.mfrp.parksmart.dto.SuggestionRequestDTO;
+import com.cts.mfrp.parksmart.service.ContactService;
 import com.cts.mfrp.parksmart.service.DashboardService;
 
 import jakarta.validation.Valid;
@@ -27,6 +29,8 @@ public class DashboardController {
 	
 	@Autowired
 	private DashboardService dashboardService;
+	@Autowired
+	private ContactService contactService;
 
 	@PostMapping("/bookings/suggestions")
 	public ResponseEntity<List<String>> getSuggestions(
@@ -53,7 +57,7 @@ public class DashboardController {
 	    return ResponseEntity.ok(result);
 	}
 	
-	@PostMapping("/user/bookings/cancel")
+	@PostMapping("/bookings/cancel")
 	public ResponseEntity<String> cancelBooking(
 	        @Valid @RequestBody CancelBookingRequestDTO request,
 	        Authentication authentication) {
@@ -75,4 +79,15 @@ public class DashboardController {
 
 	    return ResponseEntity.ok("Rating submitted successfully");
 	}
+	@PostMapping("/contacts/submit")
+    public ResponseEntity<String> submitContactRequest(
+            @Valid @RequestBody ContactRequestDTO requestDTO,
+            Authentication authentication) {
+        
+        String currentUserEmail = authentication.getName();
+        
+        contactService.saveContactRequest(requestDTO, currentUserEmail);
+        
+        return ResponseEntity.ok("Contact request submitted successfully.");
+    }
 }

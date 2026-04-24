@@ -8,7 +8,7 @@ public class WalletDTO {
 	private String description;
 	private String transactionType;
 	private double amount;
-	private double balance;
+	private int transactionId;
 	
 	public LocalDateTime getTransactionTime() {
 		return transactionTime;
@@ -34,11 +34,13 @@ public class WalletDTO {
 	public void setAmount(double amount) {
 		this.amount = amount;
 	}
-	public double getBalance() {
-		return balance;
+	public int getTransactionId() {
+		return transactionId;
 	}
-	public void setBalance(double balance) {
-		this.balance = balance;
-	}	
+	public void setTransactionId(int transactionId) {
+		this.transactionId = transactionId;
+	}
+
+	
 
 }

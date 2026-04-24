@@ -26,9 +26,9 @@ public class UserController {
     }
 
     @GetMapping("/wallet")
-    public WalletDTO getWallet(Authentication authentication) {
+    public ResponseEntity<WalletDTO> getWallet(Authentication authentication) {
     	String email = authentication.getName();
         WalletDTO wallet = userService.getWalletDetails(email);
-        return wallet;
+        return ResponseEntity.ok(wallet);
     }
 }
